@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>XzClass by Arkan</title>
+<meta name="theme-color" content="#111827">
+<style>
+:root{--bg:#f3f6fb;--card:#fff;--ink:#172033;--muted:#667085;--brand:#4f46e5;--line:#e6eaf2;--good:#087443;--bad:#b42318}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial}
+header{background:linear-gradient(135deg,#111827,#312e81);color:white;padding:22px 16px 28px}
+.wrap{max-width:980px;margin:auto;padding:0 14px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.brand{font-weight:900;font-size:22px;letter-spacing:.2px}.by{font-size:12px;opacity:.8}
+.hero{padding:22px 0 4px}.hero h1{font-size:27px;margin:0 0 4px}.hero p{margin:0;color:#dbeafe}
+nav{display:flex;gap:8px;overflow:auto;padding:14px 0;position:sticky;top:0;background:var(--bg);z-index:5}
+nav button{white-space:nowrap;border:1px solid var(--line);background:white;color:var(--ink);padding:9px 13px;border-radius:999px;font-weight:700}
+nav button.active{background:var(--brand);color:white;border-color:var(--brand)}
+main{padding-bottom:40px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 3px 12px #17203308;margin-bottom:12px}
+.card h2,.card h3{margin:0 0 10px}.muted{color:var(--muted)}.small{font-size:12px}.pill{display:inline-block;padding:3px 8px;border-radius:999px;background:#eef2ff;color:#3730a3;font-size:12px;font-weight:700}
+button,.btn{cursor:pointer}.primary{background:var(--brand);color:white;border:0;border-radius:10px;padding:10px 14px;font-weight:700}
+.secondary{background:white;color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-weight:700}
+.danger{background:#fff1f0;color:var(--bad);border:1px solid #ffd5d2;border-radius:9px;padding:7px 10px}
+input,textarea,select{width:100%;padding:11px;border:1px solid #d0d5dd;border-radius:10px;font:inherit;margin:5px 0 10px;background:white}
+textarea{min-height:82px;resize:vertical}label{font-size:13px;font-weight:700}
+.formrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.item{padding:11px 0;border-top:1px solid var(--line)}.item:first-child{border-top:0}.item strong{display:block}
+.hidden{display:none!important}.status{margin:10px 0;padding:10px 12px;border-radius:10px;background:#eef2ff;color:#3730a3}
+.status.error{background:#fff1f0;color:var(--bad)}.status.ok{background:#ecfdf3;color:var(--good)}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:25px}
+table{width:100%;border-collapse:collapse}td,th{text-align:left;padding:9px;border-bottom:1px solid var(--line);font-size:14px}
+.gamebox{background:#111827;color:white;border-radius:14px;padding:16px;text-align:center}
+.gamebox button{margin:4px}.big{font-size:30px;font-weight:900}
+@media(max-width:560px){.formrow{grid-template-columns:1fr}.hero h1{font-size:24px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="top"><div class="brand">✦ XzClass</div><div class="by">by Arkan</div></div>
+  <div class="hero"><h1>Ruang Kelas 7.1</h1><p>Informasi kelas, tugas, jadwal, dan kegiatan dalam satu tempat.</p></div>
+</div></header>
+<div class="wrap">
+<nav id="nav">
+<button class="active" data-tab="beranda">Beranda</button>
+<button data-tab="piket">Jadwal Piket</button>
+<button data-tab="tugas">PR & Tugas</button>
+<button data-tab="jadwal">Jadwal Pelajaran</button>
+<button data-tab="info">Pengumuman</button>
+<button data-tab="kas">Kas & Tabungan</button>
+<button data-tab="mabar">Game Mabar</button>
+<button data-tab="admin">Admin</button>
+</nav>
+<div id="status" class="status">Menghubungkan ke database…</div>
+<main>
+<section id="beranda" class="tab">
+<div class="grid">
+ <div class="card"><h2>📢 Pengumuman terbaru</h2><div id="homeInfo" class="muted">Memuat…</div></div>
+ <div class="card"><h2>📝 Tugas terdekat</h2><div id="homeTasks" class="muted">Memuat…</div></div>
+ <div class="card"><h2>📅 Jadwal hari ini</h2><div id="homeSchedule" class="muted">Pilih menu Jadwal Pelajaran untuk melihat jadwal.</div></div>
+</div>
+<div class="card"><h2>Selamat datang!</h2><p class="muted">Siswa dapat melihat informasi kelas tanpa akun. Fitur pengelolaan hanya untuk admin yang sudah terdaftar.</p></div>
+</section>
+<section id="piket" class="tab hidden"><div class="card"><h2>🧹 Jadwal Piket</h2><div id="dutyList">Memuat…</div></div></section>
+<section id="tugas" class="tab hidden"><div class="card"><h2>📝 PR & Tugas</h2><div id="taskList">Memuat…</div></div></section>
+<section id="jadwal" class="tab hidden"><div class="card"><h2>📚 Jadwal Pelajaran</h2><div id="scheduleList">Memuat…</div></div></section>
+<section id="info" class="tab hidden"><div class="card"><h2>📢 Pengumuman</h2><div id="infoList">Memuat…</div></div></section>
+<section id="kas" class="tab hidden">
+<div class="card"><h2>💰 Kas & Tabungan</h2><p class="muted">Data keuangan hanya bisa dilihat dan dikelola setelah admin login. Ini menjaga privasi data siswa.</p><div id="financeArea">Silakan login sebagai admin untuk membuka data kas dan tabungan.</div></div>
+</section>
+<section id="mabar" class="tab hidden"><div class="card"><h2>🎮 Game Mabar — Tebak Angka</h2><p class="muted">Main bergantian bersama teman. Angka rahasia dari 1 sampai 20.</p><div class="gamebox"><div class="big" id="gameMessage">Siap bermain?</div><p id="gameHint">Tekan mulai untuk membuat angka rahasia.</p><button class="primary" id="startGame">Mulai game</button><div style="max-width:260px;margin:auto"><input id="guess" type="number" min="1" max="20" placeholder="Tebak angka 1–20"><button class="secondary" id="guessBtn">Tebak!</button></div><p id="tries">Percobaan: 0</p></div></div></section>
+<section id="admin" class="tab hidden">
+<div class="card"><h2>🔐 Admin</h2><div id="loginArea"><p class="muted">Masuk menggunakan email dan password akun admin Supabase yang sudah dibuat.</p><label>Email admin</label><input id="email" type="email" autocomplete="username" placeholder="Email admin"><label>Password</label><input id="password" type="password" autocomplete="current-password" placeholder="Password admin"><button class="primary" id="loginBtn">Login admin</button></div><div id="adminPanel" class="hidden"><p class="pill">Admin aktif</p><p id="adminEmail"></p><button class="secondary" id="logoutBtn">Logout</button><hr style="border:0;border-top:1px solid var(--line);margin:16px 0">
+<h3>Tambah pengumuman</h3><label>Judul</label><input id="annTitle" placeholder="Judul pengumuman"><label>Isi</label><textarea id="annBody" placeholder="Tulis pengumuman…"></textarea><button class="primary" id="addAnn">Simpan pengumuman</button>
+<h3 style="margin-top:22px">Tambah PR / tugas</h3><label>Nama tugas</label><input id="taskTitle" placeholder="Contoh: latihan IPA halaman 20"><div class="formrow"><div><label>Mata pelajaran</label><input id="taskSubject" placeholder="IPA"></div><div><label>Tenggat</label><input id="taskDue" type="date"></div></div><button class="primary" id="addTask">Simpan tugas</button>
+<h3 style="margin-top:22px">Tambah jadwal pelajaran</h3><div class="formrow"><div><label>Hari</label><select id="scheduleDay"><option>Senin</option><option>Selasa</option><option>Rabu</option><option>Kamis</option><option>Jumat</option><option>Sabtu</option></select></div><div><label>Mata pelajaran</label><input id="scheduleSubject" placeholder="Matematika"></div></div><label>Jam / keterangan</label><input id="scheduleTime" placeholder="07.00–08.20"><button class="primary" id="addSchedule">Simpan jadwal</button>
+<h3 style="margin-top:22px">Tambah jadwal piket</h3><div class="formrow"><div><label>Hari</label><select id="dutyDay"><option>Senin</option><option>Selasa</option><option>Rabu</option><option>Kamis</option><option>Jumat</option><option>Sabtu</option></select></div><div><label>Nama siswa</label><input id="dutyNames" placeholder="Nama siswa, pisahkan koma"></div></div><button class="primary" id="addDuty">Simpan jadwal piket</button>
+<h3 style="margin-top:22px">Catatan keuangan (khusus admin)</h3><div class="formrow"><div><label>Jenis</label><select id="financeType"><option value="cash">Uang kas</option><option value="saving">Tabungan</option></select></div><div><label>Nama siswa / keterangan</label><input id="financeName" placeholder="Nama atau keterangan"></div></div><div class="formrow"><div><label>Jumlah (Rp)</label><input id="financeAmount" type="number" min="0" placeholder="10000"></div><div><label>Catatan</label><input id="financeNote" placeholder="Setoran / pembayaran"></div></div><button class="primary" id="addFinance">Simpan catatan</button><div id="financeTable" style="margin-top:12px"></div>
+<h3 style="margin-top:22px">Riwayat aktivitas admin</h3><div id="logsList" class="muted">Belum dimuat.</div>
+</div></div>
+</section>
+</main><footer>XzClass by Arkan • Website kelas 7.1</footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://smczgppgafsxlinpfxfq.supabase.co";
+const SUPABASE_KEY = "sb_publishable_n8dSAIEM4wQgj9HTK_UprA_05-IQD3Q";
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+let isAdmin = false;
+const $ = id => document.getElementById(id);
+function status(msg, type=""){ $("status").textContent=msg; $("status").className="status "+type; }
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function showTab(tab){document.querySelectorAll(".tab").forEach(x=>x.classList.add("hidden"));$(tab).classList.remove("hidden");document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));}
+document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.tab)));
+function renderRows(rows, kind){if(!rows?.length)return '<p class="muted">Belum ada data.</p>';return rows.map(r=>`<div class="item"><strong>${esc(r.title||r.subject||r.day||"Informasi")}</strong>${r.body?`<div>${esc(r.body)}</div>`:""}${r.subject?`<div>${esc(r.subject)}</div>`:""}${r.due_date?`<div class="small muted">Tenggat: ${esc(r.due_date)}</div>`:""}${r.day?`<div class="small muted">${esc(r.day)} ${esc(r.time||"")}</div>`:""}${r.names?`<div>${esc(r.names)}</div>`:""}${r.created_at?`<div class="small muted">${new Date(r.created_at).toLocaleString("id-ID")}</div>`:""}${isAdmin?`<button class="danger small" onclick="deleteRow('${kind}','${r.id}')">Hapus</button>`:""}</div>`).join("");}
+async function loadTable(table, target, order="created_at", kind=table){const {data,error}=await db.from(table).select("*").order(order,{ascending:false});if(error){$(target).innerHTML=`<p class="muted">Belum bisa memuat data: ${esc(error.message)}</p>`;return [];}$(target).innerHTML=renderRows(data,kind);return data||[];}
+async function loadAll(){
+ const anns=await loadTable("announcements","infoList","created_at","announcements");
+ $("homeInfo").innerHTML=anns.length?renderRows(anns.slice(0,2),"announcements"):'<p class="muted">Belum ada pengumuman.</p>';
+ const tasks=await loadTable("tasks","taskList","created_at","tasks");
+ $("homeTasks").innerHTML=tasks.length?renderRows(tasks.slice(0,2),"tasks"):'<p class="muted">Belum ada tugas.</p>';
+ await loadTable("timetable","scheduleList","day","timetable");
+ await loadTable("duty_schedule","dutyList","day","duty_schedule");
+}
+window.deleteRow=async function(table,id){if(!isAdmin||!confirm("Hapus data ini?"))return;const {error}=await db.from(table).delete().eq("id",id);if(error){status(error.message,"error");return;}await logAction("Menghapus data "+table);status("Data berhasil dihapus.","ok");loadAll();};
+async function logAction(action){try{await db.from("activity_logs").insert({action});}catch(e){}}
+async function addRecord(table,obj){const {error}=await db.from(table).insert(obj);if(error){status("Gagal menyimpan: "+error.message,"error");return false;}await logAction("Menambahkan data "+table);status("Berhasil disimpan!","ok");await loadAll();return true;}
+$("loginBtn").onclick=async()=>{const {data,error}=await db.auth.signInWithPassword({email:$("email").value.trim(),password:$("password").value});if(error){status("Login gagal: "+error.message,"error");return;}const {data:profile,error:pe}=await db.from("admin_users").select("role").eq("user_id",data.user.id).maybeSingle();if(pe||!profile){await db.auth.signOut();status("Akun ini belum terdaftar sebagai admin.","error");return;}isAdmin=true;$("loginArea").classList.add("hidden");$("adminPanel").classList.remove("hidden");$("adminEmail").textContent=data.user.email+" • "+profile.role;status("Login admin berhasil.","ok");await logAction("Login admin");refreshAdmin();}
+$("logoutBtn").onclick=async()=>{await db.auth.signOut();isAdmin=false;$("adminPanel").classList.add("hidden");$("loginArea").classList.remove("hidden");$("financeArea").textContent="Silakan login sebagai admin untuk membuka data kas dan tabungan.";status("Kamu sudah logout.");loadAll();};
+async function refreshAdmin(){
+ const [cash,savings,logs]=await Promise.all([
+ db.from("cash_transactions").select("*").order("created_at",{ascending:false}),
+ db.from("savings").select("*").order("created_at",{ascending:false}),
+ db.from("activity_logs").select("*").order("created_at",{ascending:false}).limit(20)
+ ]);
+ if(cash.error||savings.error){$("financeTable").innerHTML='<p class="muted">Tabel keuangan belum bisa dibaca. Periksa kebijakan database.</p>';}
+ else {$("financeTable").innerHTML="<h4>Uang kas</h4>"+financeRows(cash.data)+"<h4>Tabungan</h4>"+financeRows(savings.data);}
+ $("logsList").innerHTML=logs.error?esc(logs.error.message):((logs.data||[]).map(x=>`<div class="item">${esc(x.action)} <span class="small muted">${x.created_at?new Date(x.created_at).toLocaleString("id-ID"):""}</span></div>`).join("")||"Belum ada aktivitas.");
+ $("financeArea").textContent="Data keuangan dapat dikelola melalui panel Admin.";
+}
+function financeRows(rows){if(!rows?.length)return '<p class="muted">Belum ada catatan.</p>';return "<table><tr><th>Nama/keterangan</th><th>Jumlah</th><th>Catatan</th></tr>"+rows.map(x=>`<tr><td>${esc(x.student_name||x.description||"—")}</td><td>Rp ${Number(x.amount||0).toLocaleString("id-ID")}</td><td>${esc(x.note||"—")}</td></tr>`).join("")+"</table>";}
+$("addAnn").onclick=()=>addRecord("announcements",{title:$("annTitle").value.trim(),body:$("annBody").value.trim()}).then(ok=>{if(ok){$("annTitle").value="";$("annBody").value="";}});
+$("addTask").onclick=()=>addRecord("tasks",{title:$("taskTitle").value.trim(),subject:$("taskSubject").value.trim(),due_date:$("taskDue").value||null}).then(ok=>{if(ok){$("taskTitle").value="";$("taskSubject").value="";$("taskDue").value="";}});
+$("addSchedule").onclick=()=>addRecord("timetable",{day:$("scheduleDay").value,subject:$("scheduleSubject").value.trim(),time:$("scheduleTime").value.trim()}).then(ok=>{if(ok){$("scheduleSubject").value="";$("scheduleTime").value="";}});
+$("addDuty").onclick=()=>addRecord("duty_schedule",{day:$("dutyDay").value,names:$("dutyNames").value.trim()}).then(ok=>{if(ok)$("dutyNames").value="";});
+$("addFinance").onclick=async()=>{if(!isAdmin)return;const table=$("financeType").value==="cash"?"cash_transactions":"savings";const amount=Number($("financeAmount").value);if(!amount||amount<0){status("Masukkan jumlah yang benar.","error");return;}const obj=table==="cash_transactions"?{description:$("financeName").value.trim(),amount,note:$("financeNote").value.trim()}:{student_name:$("financeName").value.trim(),amount,note:$("financeNote").value.trim()};const {error}=await db.from(table).insert(obj);if(error){status("Gagal menyimpan catatan keuangan: "+error.message,"error");return;}await logAction("Menambahkan catatan "+table);status("Catatan keuangan tersimpan.","ok");$("financeAmount").value="";$("financeName").value="";$("financeNote").value="";refreshAdmin();};
+let secret=0,tries=0;
+$("startGame").onclick=()=>{secret=Math.floor(Math.random()*20)+1;tries=0;$("tries").textContent="Percobaan: 0";$("gameMessage").textContent="Angka sudah dibuat!";$("gameHint").textContent="Silakan tebak angka 1–20.";};
+$("guessBtn").onclick=()=>{if(!secret){$("gameHint").textContent="Tekan Mulai game dulu.";return;}const n=Number($("guess").value);if(!n||n<1||n>20){$("gameHint").textContent="Masukkan angka 1 sampai 20.";return;}tries++;$("tries").textContent="Percobaan: "+tries;if(n===secret){$("gameMessage").textContent="🎉 Benar!";$("gameHint").textContent="Kamu berhasil dalam "+tries+" percobaan. Tekan mulai untuk main lagi.";secret=0;}else $("gameHint").textContent=n<secret?"Terlalu kecil, coba lagi!":"Terlalu besar, coba lagi!";};
+(async()=>{const {data:{session}}=await db.auth.getSession();if(session){const {data:p}=await db.from("admin_users").select("role").eq("user_id",session.user.id).maybeSingle();if(p){isAdmin=true;$("loginArea").classList.add("hidden");$("adminPanel").classList.remove("hidden");$("adminEmail").textContent=session.user.email+" • "+p.role;await refreshAdmin();}}await loadAll();status("Terhubung ke XzClass database.","ok");})();
+</script>
+</body>
+</html>
